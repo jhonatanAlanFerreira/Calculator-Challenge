@@ -1,0 +1,19 @@
+{
+  "name": "calc-topzera",
+  "version": "1.0.0",
+  "description": "Uma calculadora topzera capaz de validar expressoes matematicas e realizar qualquer expressao numerica dada pelo usuario",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jhonatanAlanFerreira/calc-topzera.git"
+  },
+  "author": "Jhonatan.Ferreira",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jhonatanAlanFerreira/calc-topzera/issues"
+  },
+  "homepage": "https://github.com/jhonatanAlanFerreira/calc-topzera#readme"
+}
