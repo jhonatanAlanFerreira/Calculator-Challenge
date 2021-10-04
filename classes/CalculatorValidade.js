@@ -13,14 +13,18 @@ module.exports = class CalculatorValidade {
         },
 
         checkParentheses: expression => {
-            let openParentheses = (expression.match(/\(/g) || []).length;
-            let closeParentheses = (expression.match(/\)/g) || []).length;
+            let count = 0;
 
-            if (openParentheses > closeParentheses)
-                this.sendError('Confira se não faltou fechar alguns parênteses.');
+            for (let i = 0; i < expression.length; i++) {
+                let l = expression[i];
 
-            if (openParentheses < closeParentheses)
-                this.sendError('Confira se não tem parênteses a mais fechados.');
+                if (l == '(') count++;
+                if (l == ')') count--;
+
+                if (count < 0) this.sendError('Confira se não esqueceu de abrir algum parêntese');
+            }
+
+            if (count > 0) this.sendError('Confira se não faltou fechar algum parêntese');
         },
 
         checkOperatorsParentheses: expression => {
