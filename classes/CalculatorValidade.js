@@ -1,5 +1,11 @@
 module.exports = class CalculatorValidade {
 
+    static validate(expression) {
+        let validadeFunctions = Object.keys(this.validations);
+        let isValid = validadeFunctions.every(fn => this.validations[fn](expression));
+        if (!isValid) process.exit();
+    }
+
     static validations = {
         checkChars: expression => {
             let isValid = /^[\+\-\*\^\/\(\)\s\d]+$/.test(expression);
@@ -14,21 +20,30 @@ module.exports = class CalculatorValidade {
 
             if (openParentheses > closeParentheses) {
                 isValid = false;
-                console.error('Opa. Confira se não faltou fechar alguns parênteses...');
+                console.error('Opa parece que há um erro na expressão. Confira se não faltou fechar alguns parênteses.');
             }
             if (openParentheses < closeParentheses) {
                 isValid = false;
-                console.error('Opa... Confira se não tem parênteses a mais fechados...');
+                console.error('Opa parece que há um erro na expressão. Confira se não tem parênteses a mais fechados.');
+            }
+
+            return isValid;
+        },
+
+        checkOperatorsParentheses: expression => {
+            let isValid = true;
+
+            if (/[\+\-\*\^\/]\)/.test(expression)) {
+                isValid = false;
+                console.error('Opa parece que há um erro na expressão. Confira se não tem algum parêntese fechando logo após um operador.');
+            }
+            if (/\([\+\-\*\^\/]/.test(expression)) {
+                isValid = false;
+                console.error('Opa parece que há um erro na expressão. Confira se não tem algum operador logo após abrir um novo parêntese.');
             }
 
             return isValid;
         }
     };
-
-    static validate(expression) {
-        let validadeFunctions = Object.keys(this.validations);
-        let isValid = validadeFunctions.every(fn => this.validations[fn](expression));
-        if (!isValid) process.exit();
-    }
 
 }
