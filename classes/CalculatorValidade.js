@@ -8,7 +8,20 @@ module.exports = class CalculatorValidade {
         },
 
         checkParentheses: expression => {
-            return true;
+            let isValid = true;
+            let openParentheses = (expression.match(/\(/g) || []).length;
+            let closeParentheses = (expression.match(/\)/g) || []).length;
+
+            if (openParentheses > closeParentheses) {
+                isValid = false;
+                console.error('Opa. Confira se não faltou fechar alguns parênteses...');
+            }
+            if (openParentheses < closeParentheses) {
+                isValid = false;
+                console.error('Opa... Confira se não tem parênteses a mais fechados...');
+            }
+
+            return isValid;
         }
     };
 

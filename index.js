@@ -6,7 +6,7 @@ if (input.length < 3) {
     process.exit();
 }
 if (input.length > 3) {
-    console.error("A expressão deve ser escrita entre aspas se existirem espaços entre os caracteres, exemplo: '1 + 1'");
+    console.error("A expressão não foi escrita entre aspas ou é curta de mais");
     process.exit();
 }
 
