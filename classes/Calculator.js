@@ -8,4 +8,13 @@ module.exports = class Calculator {
         this._expression = expression;
     }
 
+    execute() {
+        let operation = this._getNextOperation();
+        console.log(operation);
+    }
+
+    _getNextOperation() {
+        return this._expression;
+    }
+
 }

@@ -11,3 +11,4 @@ if (input.length > 3) {
 }
 
 let calculator = new Calculator(input[2]);
+calculator.execute();
