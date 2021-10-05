@@ -39,6 +39,23 @@ module.exports = class CalculatorValidade {
             if (/\d\(/.test(expression)) this.sendError('Confira se não tem algum parêntese aberto logo depois de um número');
 
             if (/\)\d/.test(expression)) this.sendError('Confira se não tem algum número logo após fechar um parêntese');
+        },
+
+        checkNumbersOperators: expression => {
+            if (/\d\s+\d/.test(expression)) this.sendError('Confira se não faltou algum operador entre 2 números');
+        },
+
+        checkManyOperators: expression => {
+            expression = expression.replace(/\*{2}/g, '*');
+            if (/[\+\-\*\^\/]{2}/.test(expression)) this.sendError('Confira se não faltou colocar um número entre algum operador');
+        },
+
+        checkDot: expression => {
+            let isValid = true;
+            if (/\D\.|\.\D/.test(expression)) isValid = false;
+            if (/(.\..\.)/.test(expression)) isValid = false;
+
+            if (!isValid) this.sendError('Confira se não tem algum ponto fora do lugar');
         }
     };
 

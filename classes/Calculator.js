@@ -5,6 +5,7 @@ module.exports = class Calculator {
 
     constructor(expression) {
         CalculatorValidade.validate(expression);
+        expression = expression.replace(/\s/g, '');
         this._expression = expression;
     }
 
