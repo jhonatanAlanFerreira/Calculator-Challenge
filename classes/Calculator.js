@@ -18,14 +18,13 @@ module.exports = class Calculator {
         end++;
 
         let operation = this._expression.slice(start, end);
-        let result = this._getResult(operation); //falta implementar, será o resultado da operação
+        let result = this._getResult(operation);
 
         let exp = this._expression;
         this._expression = exp.substring(0, start) + result + exp.substring(end);
 
-        //linhas de teste, serão removidas
-        console.log(operation);
-        console.log(this._expression);
+        if (!/^[\d\.]+$/.test(this._expression)) this.execute();
+        else console.log(this._expression);
     }
 
     _getNextOperationPosition() {
@@ -53,9 +52,56 @@ module.exports = class Calculator {
         };
     }
 
-    //falta implementar
     _getResult(operation) {
-        return 0;
+        let exec;
+
+        let xor = /([\d\.]+)(\^)([\d\.]+)/;
+        exec = xor.exec(operation);
+        if (exec) {
+            operation = operation.replace(xor, exec[1] ^ exec[3]);
+            return this._getResult(operation);
+        }
+
+        let pow = /([\d\.]+)(\*{2})([\d\.]+)/;
+        exec = pow.exec(operation);
+        if (exec) {
+            operation = operation.replace(pow, exec[1] ** exec[3]);
+            return this._getResult(operation);
+        }
+
+        let multiplication = /([\d\.]+)(\*)([\d\.]+)/;
+        exec = multiplication.exec(operation);
+        if (exec) {
+            operation = operation.replace(multiplication, exec[1] * exec[3]);
+            return this._getResult(operation);
+        }
+
+        let division = /([\d\.]+)(\/)([\d\.]+)/;
+        exec = division.exec(operation);
+        if (exec) {
+            if (exec[3] == 0) {
+                console.log(`Opa cheguei em uma divisão por 0 aqui '${this._expression}'`);
+                process.exit();
+            }
+            operation = operation.replace(division, exec[1] / exec[3]);
+            return this._getResult(operation);
+        }
+
+        let sum = /([\d\.]+)(\+)([\d\.]+)/;
+        exec = sum.exec(operation);
+        if (exec) {
+            operation = operation.replace(sum, exec[1] + exec[3]);
+            return this._getResult(operation);
+        }
+
+        let minus = /([\d\.]+)(\-)([\d\.]+)/;
+        exec = minus.exec(operation);
+        if (exec) {
+            operation = operation.replace(minus, exec[1] + exec[3]);
+            return this._getResult(operation);
+        }
+
+        return operation.replace(/[\(\)]/g, '');
     }
 
 }
