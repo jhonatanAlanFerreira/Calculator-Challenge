@@ -90,14 +90,14 @@ module.exports = class Calculator {
         let sum = /([\d\.]+)(\+)([\d\.]+)/;
         exec = sum.exec(operation);
         if (exec) {
-            operation = operation.replace(sum, exec[1] + exec[3]);
+            operation = operation.replace(sum, +exec[1] + +exec[3]);
             return this._getResult(operation);
         }
 
         let minus = /([\d\.]+)(\-)([\d\.]+)/;
         exec = minus.exec(operation);
         if (exec) {
-            operation = operation.replace(minus, exec[1] + exec[3]);
+            operation = operation.replace(minus, exec[1] - exec[3]);
             return this._getResult(operation);
         }
 
