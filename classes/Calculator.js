@@ -55,13 +55,6 @@ module.exports = class Calculator {
     _getResult(operation) {
         let exec;
 
-        let xor = /([\d\.]+)(\^)([\d\.]+)/;
-        exec = xor.exec(operation);
-        if (exec) {
-            operation = operation.replace(xor, exec[1] ^ exec[3]);
-            return this._getResult(operation);
-        }
-
         let pow = /([\d\.]+)(\*{2})([\d\.]+)/;
         exec = pow.exec(operation);
         if (exec) {
@@ -100,6 +93,14 @@ module.exports = class Calculator {
             operation = operation.replace(minus, exec[1] - exec[3]);
             return this._getResult(operation);
         }
+
+        let xor = /([\d\.]+)(\^)([\d\.]+)/;
+        exec = xor.exec(operation);
+        if (exec) {
+            operation = operation.replace(xor, exec[1] ^ exec[3]);
+            return this._getResult(operation);
+        }
+
 
         return operation.replace(/[\(\)]/g, '');
     }
