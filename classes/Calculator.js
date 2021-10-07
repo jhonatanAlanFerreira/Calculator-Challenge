@@ -2,14 +2,20 @@ const CalculatorValidade = require("./CalculatorValidade");
 
 module.exports = class Calculator {
     _expression;
+    _verbose;
+    _parentheseCal = false;
 
-    constructor(expression) {
+    constructor(expression, verbose = false) {
         CalculatorValidade.validate(expression);
         expression = expression.replace(/\s/g, '');
         this._expression = expression;
+        this._verbose = verbose;
+        if (this._verbose) console.log(this._expression);
     }
 
     execute() {
+        if (this._verbose && this._parentheseCal) console.log('Parêntese resolvido -> ' + this._expression);
+
         let operationPosition = this._getNextOperationPosition();
         let {
             start,
@@ -54,6 +60,17 @@ module.exports = class Calculator {
 
     _getResult(operation) {
         let exec;
+        if (this._verbose) {
+            let hasParentheses = /\(/.test(operation);
+
+            if (hasParentheses) {
+                console.log('Resolvendo parênteses -> ' + operation);
+                this._parentheseCal = true;
+            } else {
+                this._parentheseCal = false;
+                console.log(operation);
+            }
+        }
 
         let pow = /(-?[\d\.]+(?:e[\+\-]\d+?)?)(\*{2})(-?[\d\.]+(?:e[\+\-]\d+)?)/;
         exec = pow.exec(operation);
@@ -100,7 +117,6 @@ module.exports = class Calculator {
             operation = operation.replace(xor, exec[1] ^ exec[3]);
             return this._getResult(operation);
         }
-
 
         return operation.replace(/[\(\)]/g, '');
     }

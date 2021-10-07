@@ -4,5 +4,5 @@ const input = process.argv;
 
 CalculatorValidade.inputValidate(input);
 
-let calculator = new Calculator(input[2]);
+let calculator = new Calculator(input[2], true);
 calculator.execute();
