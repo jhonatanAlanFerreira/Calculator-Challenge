@@ -31,7 +31,7 @@ module.exports = class CalculatorValidade {
             if (/[\+\-\*\^\/]\)/.test(expression))
                 this.sendError('Confira se não tem algum parêntese fechando logo após um operador.');
 
-            if (/\([\+\-\*\^\/]/.test(expression))
+            if (/\([\+\*\^\/]/.test(expression))
                 this.sendError('Confira se não tem algum operador logo após abrir um novo parêntese.');
         },
 
@@ -47,7 +47,7 @@ module.exports = class CalculatorValidade {
 
         checkManyOperators: expression => {
             expression = expression.replace(/\*{2}/g, '*');
-            if (/[\+\-\*\^\/]{2}/.test(expression)) this.sendError('Confira se não faltou colocar um número entre algum operador');
+            if (/[\-\+\*\^\/][\+\*\^\/]/.test(expression)) this.sendError('Confira se não faltou colocar um número entre algum operador');
         },
 
         checkDot: expression => {
