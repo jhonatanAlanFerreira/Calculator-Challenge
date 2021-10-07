@@ -26,6 +26,11 @@ module.exports = class Calculator {
         let operation = this._expression.slice(start, end);
         let result = this._getResult(operation);
 
+        if (result == 'Infinity') {
+            console.error(`O resultado dessa operação '${operation}' é muito grande`);
+            process.exit();
+        }
+
         let exp = this._expression;
         this._expression = exp.substring(0, start) + result + exp.substring(end);
 
@@ -60,6 +65,7 @@ module.exports = class Calculator {
 
     _getResult(operation) {
         let exec;
+
         if (this._verbose) {
             let hasParentheses = /\(/.test(operation);
 
@@ -72,49 +78,49 @@ module.exports = class Calculator {
             }
         }
 
-        let pow = /(-?[\d\.]+(?:e[\+\-]\d+?)?)(\*{2})(-?[\d\.]+(?:e[\+\-]\d+)?)/;
+        let pow = /(-?[\d\.]+(?:e[\+\-]\d+?)?)\*{2}(-?[\d\.]+(?:e[\+\-]\d+)?)/;
         exec = pow.exec(operation);
         if (exec) {
-            operation = operation.replace(pow, exec[1] ** exec[3]);
+            operation = operation.replace(pow, exec[1] ** exec[2]);
             return this._getResult(operation);
         }
 
-        let multiplication = /(?<!\/)(-?[\d\.]+(?:e[\+\-]\d+?)?)(\*)(-?[\d\.]+(?:e[\+\-]\d+)?)/;
+        let multiplication = /(?<!\/)(-?[\d\.]+(?:e[\+\-]\d+?)?)\*(-?[\d\.]+(?:e[\+\-]\d+)?)/;
         exec = multiplication.exec(operation);
         if (exec) {
-            operation = operation.replace(multiplication, exec[1] * exec[3]);
+            operation = operation.replace(multiplication, exec[1] * exec[2]);
             return this._getResult(operation);
         }
 
-        let division = /(-?[\d\.]+(?:e[\+\-]\d+?)?)(\/)(-?[\d\.]+(?:e[\+\-]\d+)?)/;
+        let division = /(-?[\d\.]+(?:e[\+\-]\d+?)?)\/(-?[\d\.]+(?:e[\+\-]\d+)?)/;
         exec = division.exec(operation);
         if (exec) {
-            if (exec[3] == 0) {
+            if (exec[2] == 0) {
                 console.log(`Opa cheguei em uma divisão por 0 aqui '${this._expression}'`);
                 process.exit();
             }
-            operation = operation.replace(division, exec[1] / exec[3]);
+            operation = operation.replace(division, exec[1] / exec[2]);
             return this._getResult(operation);
         }
 
-        let sum = /(-?[\d\.]+(?:e[\+\-]\d+?)?)(\+)(-?[\d\.]+(?:e[\+\-]\d+)?)/;
+        let sum = /(-?[\d\.]+(?:e[\+\-]\d+?)?)\+(-?[\d\.]+(?:e[\+\-]\d+)?)/;
         exec = sum.exec(operation);
         if (exec) {
-            operation = operation.replace(sum, +exec[1] + +exec[3]);
+            operation = operation.replace(sum, +exec[1] + +exec[2]);
             return this._getResult(operation);
         }
 
-        let minus = /(-?[\d\.]+(?:e[\+\-]\d+?)?)(\-)(-?[\d\.]+(?:e[\+\-]\d+)?)/;
+        let minus = /(-?[\d\.]+(?:e[\+\-]\d+?)?)-(-?[\d\.]+(?:e[\+\-]\d+)?)/;
         exec = minus.exec(operation);
         if (exec) {
-            operation = operation.replace(minus, exec[1] - exec[3]);
+            operation = operation.replace(minus, exec[1] - exec[2]);
             return this._getResult(operation);
         }
 
-        let xor = /(-?[\d\.]+(?:e[\+\-]\d+?)?)(\^)(-?[\d\.]+(?:e[\+\-]\d+)?)/;
+        let xor = /(-?[\d\.]+(?:e[\+\-]\d+?)?)\^(-?[\d\.]+(?:e[\+\-]\d+)?)/;
         exec = xor.exec(operation);
         if (exec) {
-            operation = operation.replace(xor, exec[1] ^ exec[3]);
+            operation = operation.replace(xor, exec[1] ^ exec[2]);
             return this._getResult(operation);
         }
 
