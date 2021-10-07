@@ -6,11 +6,9 @@ if (input.length < 3 || !input[2] || /[\+\-\*\^\.\e\/]/.test(input[2][0])) {
     process.exit();
 }
 if (input.length > 3) {
-    console.error("A expressão não foi escrita entre aspas");
+    console.error("A expressão não foi escrita entre aspas ou foi enviado mais de um parâmetro");
     process.exit();
 }
-
-// let verbose = input[]
 
 let calculator = new Calculator(input[2]);
 calculator.execute();
