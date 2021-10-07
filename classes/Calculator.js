@@ -64,7 +64,7 @@ module.exports = class Calculator {
             let hasParentheses = /\(/.test(operation);
 
             if (hasParentheses) {
-                console.log('Resolvendo parênteses -> ' + operation);
+                console.log('Resolvendo parêntese -> ' + operation);
                 this._parentheseCal = true;
             } else {
                 this._parentheseCal = false;
