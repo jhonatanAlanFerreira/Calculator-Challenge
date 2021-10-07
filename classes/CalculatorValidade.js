@@ -31,7 +31,7 @@ module.exports = class CalculatorValidade {
             if (/[\+\-\*\^\/]\)/.test(expression))
                 this.sendError('Confira se não tem algum parêntese fechando logo após um operador.');
 
-            if (/\([\+\*\^\/]/.test(expression))
+            if (/\([\*\^\/]/.test(expression))
                 this.sendError('Confira se não tem algum operador logo após abrir um novo parêntese.');
         },
 

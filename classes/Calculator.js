@@ -23,7 +23,7 @@ module.exports = class Calculator {
         let exp = this._expression;
         this._expression = exp.substring(0, start) + result + exp.substring(end);
 
-        if (!/^-?[\d\.]+(?:e[\+\-]\d+?)?$/.test(this._expression)) this.execute();
+        if (!/^[-\+]?[\d\.]+(?:e[\+\-]\d+?)?$/.test(this._expression)) this.execute();
         else console.log(this._expression);
     }
 
