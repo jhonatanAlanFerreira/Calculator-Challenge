@@ -8,8 +8,8 @@ module.exports = class CalculatorValidade {
 
     static validations = {
         checkChars: expression => {
-            if (!/^[\+\-\*\^\.\/\(\)\s\d]+$/.test(expression))
-                this.sendError("A expressão não deve conter letras ou simbolos diferentes de: + - * ^ . / ( )");
+            if (!/^[\+\-\*\^\.\e\/\(\)\s\d]+$/.test(expression))
+                this.sendError("A expressão não deve conter letras ou simbolos diferentes de: + - * ^ . e / ( )");
         },
 
         checkParentheses: expression => {
@@ -56,6 +56,11 @@ module.exports = class CalculatorValidade {
             if (/(.\..\.)/.test(expression)) isValid = false;
 
             if (!isValid) this.sendError('Confira se não tem algum ponto fora do lugar');
+        },
+
+        checkScientificNotation: expression => {
+            expression = expression.replace(/\d+?e[\+\-]\d+/g, '');
+            if (expression.includes('e')) this.sendError("Confira se não tem um 'e' de notação científica fora de lugar")
         }
     };
 
