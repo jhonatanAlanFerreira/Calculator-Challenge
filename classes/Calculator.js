@@ -74,6 +74,7 @@ module.exports = class Calculator {
         let exec;
 
         operation = operation.replace(/(\+-)|(-\+)/g, '-');
+        operation = operation.replace(/-{2}/g, '+');
 
         if (this._verbose) {
             let hasParentheses = /\(/.test(operation);
@@ -100,7 +101,7 @@ module.exports = class Calculator {
             }
 
             let result = exec[1] ** exec[2];
-            console.log('Result -> ' + result);
+            console.log('Resultado -> ' + result);
 
             operation = operation.replace(pow, this._negativeFix(exec[1], result));
             return this._getResult(operation);
@@ -114,7 +115,7 @@ module.exports = class Calculator {
             });
 
             let result = exec[1] * exec[2];
-            console.log('Result -> ' + result);
+            console.log('Resultado -> ' + result);
 
             operation = operation.replace(multiplication, this._negativeFix(exec[1], result));
             return this._getResult(operation);
@@ -132,7 +133,7 @@ module.exports = class Calculator {
             }
 
             let result = exec[1] / exec[2];
-            console.log('Result -> ' + result);
+            console.log('Resultado -> ' + result);
 
             operation = operation.replace(division, this._negativeFix(exec[1], result));
             return this._getResult(operation);
@@ -146,7 +147,7 @@ module.exports = class Calculator {
             });
 
             let result = +exec[1] + +exec[2];
-            console.log('Result -> ' + result);
+            console.log('Resultado -> ' + result);
 
             operation = operation.replace(sum, this._negativeFix(exec[1], result));
             return this._getResult(operation);
@@ -160,7 +161,7 @@ module.exports = class Calculator {
             });
 
             let result = exec[1] - exec[2];
-            console.log('Result -> ' + result);
+            console.log('Resultado -> ' + result);
 
             operation = operation.replace(minus, this._negativeFix(exec[1], result));
             return this._getResult(operation);
@@ -174,7 +175,7 @@ module.exports = class Calculator {
             });
 
             let result = exec[1] ^ exec[2];
-            console.log('Result -> ' + result);
+            console.log('Resultado -> ' + result);
 
             operation = operation.replace(xor, this._negativeFix(exec[1], result));
             return this._getResult(operation);
