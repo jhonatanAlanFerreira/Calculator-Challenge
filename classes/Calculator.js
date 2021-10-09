@@ -65,6 +65,11 @@ module.exports = class Calculator {
         };
     }
 
+    _negativeFix(number, result) {
+        if (number.toString()[0] == '-' && result.toString()[0] != '-') result = '+' + result;
+        return result;
+    }
+
     _getResult(operation) {
         let exec;
 
@@ -92,7 +97,9 @@ module.exports = class Calculator {
                 process.exit();
             }
 
-            operation = operation.replace(pow, exec[1] ** exec[2]);
+            let result = exec[1] ** exec[2];
+
+            operation = operation.replace(pow, this._negativeFix(exec[1], result));
             return this._getResult(operation);
         }
 
@@ -102,7 +109,10 @@ module.exports = class Calculator {
             if (this._debugger) console.log({
                 multiplication: exec
             });
-            operation = operation.replace(multiplication, exec[1] * exec[2]);
+
+            let result = exec[1] * exec[2];
+
+            operation = operation.replace(multiplication, this._negativeFix(exec[1], result));
             return this._getResult(operation);
         }
 
@@ -116,7 +126,10 @@ module.exports = class Calculator {
                 console.log(`Opa cheguei em uma divisão por 0 aqui '${this._expression}'`);
                 process.exit();
             }
-            operation = operation.replace(division, exec[1] / exec[2]);
+
+            let result = exec[1] / exec[2];
+
+            operation = operation.replace(division, this._negativeFix(exec[1], result));
             return this._getResult(operation);
         }
 
@@ -126,7 +139,10 @@ module.exports = class Calculator {
             if (this._debugger) console.log({
                 sum: exec
             });
-            operation = operation.replace(sum, +exec[1] + +exec[2]);
+
+            let result = +exec[1] + +exec[2];
+
+            operation = operation.replace(sum, this._negativeFix(exec[1], result));
             return this._getResult(operation);
         }
 
@@ -136,7 +152,10 @@ module.exports = class Calculator {
             if (this._debugger) console.log({
                 minus: exec
             });
-            operation = operation.replace(minus, exec[1] - exec[2]);
+
+            let result = exec[1] - exec[2];
+
+            operation = operation.replace(minus, this._negativeFix(exec[1], result));
             return this._getResult(operation);
         }
 
@@ -146,7 +165,10 @@ module.exports = class Calculator {
             if (this._debugger) console.log({
                 xor: exec
             });
-            operation = operation.replace(xor, exec[1] ^ exec[2]);
+
+            let result = exec[1] ^ exec[2];
+
+            operation = operation.replace(xor, this._negativeFix(exec[1], result));
             return this._getResult(operation);
         }
 
