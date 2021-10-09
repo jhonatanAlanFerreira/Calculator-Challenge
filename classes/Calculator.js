@@ -28,11 +28,6 @@ module.exports = class Calculator {
         let operation = this._expression.slice(start, end);
         let result = this._getResult(operation);
 
-        if (result == 'Infinity') {
-            console.error(`O resultado dessa operação '${operation}' é muito grande`);
-            process.exit();
-        }
-
         let exp = this._expression;
         this._expression = exp.substring(0, start) + result + exp.substring(end);
 
@@ -72,6 +67,11 @@ module.exports = class Calculator {
 
     _getResult(operation) {
         let exec;
+
+        if (operation.includes('Infinity')) {
+            console.error(`O resultado da operação retornou um valor muito grande e está fora do limite do calculo`);
+            process.exit();
+        }
 
         operation = operation.replace(/(\+-)|(-\+)/g, '-');
         operation = operation.replace(/-{2}/g, '+');
