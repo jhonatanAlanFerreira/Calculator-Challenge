@@ -3,13 +3,15 @@ const CalculatorValidade = require("./CalculatorValidade");
 module.exports = class Calculator {
     _expression;
     _verbose;
+    _debugger;
     _parentheseCal = false;
 
-    constructor(expression, verbose = false) {
+    constructor(expression, verbose = false, debugg = false) {
         CalculatorValidade.validate(expression);
         expression = expression.replace(/\s/g, '');
         this._expression = expression;
         this._verbose = verbose;
+        this._debugger = debugg;
         if (this._verbose) console.log(this._expression);
     }
 
@@ -81,6 +83,15 @@ module.exports = class Calculator {
         let pow = /(-?[\d\.]+(?:e[\+\-]\d+?)?)\*{2}(-?[\d\.]+(?:e[\+\-]\d+)?)/;
         exec = pow.exec(operation);
         if (exec) {
+            if (this._debugger) console.log({
+                pow: exec
+            });
+
+            if (/-/.test(exec[1]) && /\./.test(exec[2])) {
+                console.log(`Opa cheguei em um número negativo elevado a um número com decimais aqui '${this._expression}'`);
+                process.exit();
+            }
+
             operation = operation.replace(pow, exec[1] ** exec[2]);
             return this._getResult(operation);
         }
@@ -88,6 +99,9 @@ module.exports = class Calculator {
         let multiplication = /(?<!\/)(-?[\d\.]+(?:e[\+\-]\d+?)?)\*(-?[\d\.]+(?:e[\+\-]\d+)?)/;
         exec = multiplication.exec(operation);
         if (exec) {
+            if (this._debugger) console.log({
+                multiplication: exec
+            });
             operation = operation.replace(multiplication, exec[1] * exec[2]);
             return this._getResult(operation);
         }
@@ -95,6 +109,9 @@ module.exports = class Calculator {
         let division = /(-?[\d\.]+(?:e[\+\-]\d+?)?)\/(-?[\d\.]+(?:e[\+\-]\d+)?)/;
         exec = division.exec(operation);
         if (exec) {
+            if (this._debugger) console.log({
+                division: exec
+            });
             if (exec[2] == 0) {
                 console.log(`Opa cheguei em uma divisão por 0 aqui '${this._expression}'`);
                 process.exit();
@@ -106,6 +123,9 @@ module.exports = class Calculator {
         let sum = /(-?[\d\.]+(?:e[\+\-]\d+?)?)\+(-?[\d\.]+(?:e[\+\-]\d+)?)/;
         exec = sum.exec(operation);
         if (exec) {
+            if (this._debugger) console.log({
+                sum: exec
+            });
             operation = operation.replace(sum, +exec[1] + +exec[2]);
             return this._getResult(operation);
         }
@@ -113,6 +133,9 @@ module.exports = class Calculator {
         let minus = /(-?[\d\.]+(?:e[\+\-]\d+?)?)-(-?[\d\.]+(?:e[\+\-]\d+)?)/;
         exec = minus.exec(operation);
         if (exec) {
+            if (this._debugger) console.log({
+                minus: exec
+            });
             operation = operation.replace(minus, exec[1] - exec[2]);
             return this._getResult(operation);
         }
@@ -120,6 +143,9 @@ module.exports = class Calculator {
         let xor = /(-?[\d\.]+(?:e[\+\-]\d+?)?)\^(-?[\d\.]+(?:e[\+\-]\d+)?)/;
         exec = xor.exec(operation);
         if (exec) {
+            if (this._debugger) console.log({
+                xor: exec
+            });
             operation = operation.replace(xor, exec[1] ^ exec[2]);
             return this._getResult(operation);
         }
