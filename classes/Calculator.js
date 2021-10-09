@@ -73,6 +73,8 @@ module.exports = class Calculator {
     _getResult(operation) {
         let exec;
 
+        operation = operation.replace(/(\+-)|(-\+)/g, '-');
+
         if (this._verbose) {
             let hasParentheses = /\(/.test(operation);
 
@@ -98,6 +100,7 @@ module.exports = class Calculator {
             }
 
             let result = exec[1] ** exec[2];
+            console.log('Result -> ' + result);
 
             operation = operation.replace(pow, this._negativeFix(exec[1], result));
             return this._getResult(operation);
@@ -111,6 +114,7 @@ module.exports = class Calculator {
             });
 
             let result = exec[1] * exec[2];
+            console.log('Result -> ' + result);
 
             operation = operation.replace(multiplication, this._negativeFix(exec[1], result));
             return this._getResult(operation);
@@ -128,6 +132,7 @@ module.exports = class Calculator {
             }
 
             let result = exec[1] / exec[2];
+            console.log('Result -> ' + result);
 
             operation = operation.replace(division, this._negativeFix(exec[1], result));
             return this._getResult(operation);
@@ -141,6 +146,7 @@ module.exports = class Calculator {
             });
 
             let result = +exec[1] + +exec[2];
+            console.log('Result -> ' + result);
 
             operation = operation.replace(sum, this._negativeFix(exec[1], result));
             return this._getResult(operation);
@@ -154,6 +160,7 @@ module.exports = class Calculator {
             });
 
             let result = exec[1] - exec[2];
+            console.log('Result -> ' + result);
 
             operation = operation.replace(minus, this._negativeFix(exec[1], result));
             return this._getResult(operation);
@@ -167,6 +174,7 @@ module.exports = class Calculator {
             });
 
             let result = exec[1] ^ exec[2];
+            console.log('Result -> ' + result);
 
             operation = operation.replace(xor, this._negativeFix(exec[1], result));
             return this._getResult(operation);
