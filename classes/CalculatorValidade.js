@@ -59,7 +59,7 @@ module.exports = class CalculatorValidade {
         checkManyOperators: expression => {
             let isValid = true;
             expression = expression.replace(/\*{2}/g, '*');
-            if (/[\-\+\*\^\/][\+\*\^\/]/.test(expression)) isValid = false;
+            if (/[\-\+\*\^\/]{2}/.test(expression)) isValid = false;
             if (/(?:^[\/\^])|(?:[\/\^\+\-\*]$)/.test(expression)) isValid = false;
 
             if (!isValid) this.sendError('Confira se não faltou colocar um número entre algum operador');
