@@ -68,7 +68,7 @@ module.exports = class CalculatorValidade {
         checkDot: expression => {
             let isValid = true;
             if (/\D\.|\.\D/.test(expression)) isValid = false;
-            if (/(.\..\.)/.test(expression)) isValid = false;
+            if (/(.\.\d+?\.)/.test(expression)) isValid = false;
 
             if (!isValid) this.sendError('Confira se não tem algum ponto fora do lugar');
         },
