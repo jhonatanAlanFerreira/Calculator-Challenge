@@ -34,3 +34,7 @@ Se estiver tudo certo agora é só resolver todo o cálculo,  a função 'execu
 Para resolver o trecho da operação, dentro da função '_getResult' existe uma função para cada operador diferente e a ordem delas estão organizadas conforme a ordem em que cada operação deve ser realizada na matemática. Para cada operação existe um regex para encontrar a operação no trecho, ele encontra o número da esquerda que pode conter sinais, pontos e até notação científica o que também vale pelo número da direta, depois executa a operação, faz algumas tratativas de sinais usando a função '_negativeFix', faz um replace com o resultado e executa de novo a mesma função recursivamente até que nem um dos regex encontre outra operação e por fim retorna o resultado a função 'execute' removendo os parênteses caso tenha na linha 184.
 
 Essa função '_negativeFix' serve para verificar regras de sinais como, por exemplo, menos com menos vira mais.
+
+### Implementações futuras
+-Verificar possibilidade de diminuir os algoritmos e encurtar os regex.
+<br>-Criar uma função para retornar o base64 da imagem da expressão em notação científica.
