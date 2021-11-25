@@ -1,5 +1,5 @@
 # calc-topzera
-Um desafio para fazer uma calculadora topzera capaz de validar expressões matemáticas e realizar qualquer expressão dada pelo usuário.
+Um desafio para fazer uma calculadora topzera capaz de validar expressões matemáticas e realizar qualquer expressão dada pelo usuário, sem usar eval(), bibliotecas e coisas do tipo.
 
 ### Sobre o desafio
 Fazer essa calcula foi um desafio bem legal, o que mais gostei foram os regexs bem complicados que tive que aplicar tanto para fazer as validações que não eram fáceis quanto para encontrar a parte correta do próximo cálculo e dividi-las entre números e os operadores que é ainda mais difícil. Tentei encontrar o máximo de formas erradas de escrever a expressão não só para validar, mas também mostrar a causa do erro ao usuário como, por exemplo, dizer que faltou abrir ou fechar um parêntese na expressão.
