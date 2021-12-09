@@ -1,7 +1,7 @@
 {
-  "name": "calc-topzera",
+  "name": "calculator-chalange",
   "version": "1.0.0",
-  "description": "Uma calculadora topzera capaz de validar expressoes matematicas e realizar qualquer expressao numerica dada pelo usuario",
+  "description": "Uma calculadora capaz de validar expressoes matematicas e realizar qualquer expressao numerica dada pelo usuario",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
