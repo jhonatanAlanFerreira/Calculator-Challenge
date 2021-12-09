@@ -4,7 +4,7 @@
 
 ## 💻 Pré-requisitos
 Necessário ter Node.js instalado.
-https://nodejs.org/en/download
+<br>https://nodejs.org/en/download
 
 ## ☕ Usando Calculator Challenge
 Não é necessário nem uma instalação adicional, na pasta onde está o package.json é só executar um dos três scripts, por exemplo:
