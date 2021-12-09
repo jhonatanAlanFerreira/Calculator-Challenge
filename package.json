@@ -1,5 +1,5 @@
 {
-  "name": "calculator-chalange",
+  "name": "calculator-challenge",
   "version": "1.0.0",
   "description": "Uma calculadora capaz de validar expressoes matematicas e realizar qualquer expressao numerica dada pelo usuario",
   "main": "index.js",
