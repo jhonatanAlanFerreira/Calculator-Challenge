@@ -3,8 +3,8 @@
 > Um desafio para fazer uma calculadora capaz de validar expressões matemáticas e realizar qualquer expressão dada pelo usuário, sem usar eval(), bibliotecas e coisas do tipo.
 
 ## 💻 Pré-requisitos
-Necessário ter Node.js instalado.
-<br>https://nodejs.org/en/download
+Necessário ter Node.js e NPM instalados.
+<br>https://docs.npmjs.com/downloading-and-installing-node-js-and-npm
 
 ## ☕ Usando Calculator Challenge
 Não é necessário nem uma instalação adicional, na pasta onde está o package.json é só executar um dos três scripts, por exemplo:
