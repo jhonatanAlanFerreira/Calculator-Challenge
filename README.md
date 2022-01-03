@@ -23,5 +23,4 @@ Para cada uma das validações a baixo, é informado ao usuário o motivo com um
 * Verifica se existe algum 'e' de notação científico em um lugar inválido ou sendo usado de forma incorreta como: '50e10 + 5' ou '50e*10' ou 'e 10 + 1'.
 
 ## 🛠️ Implementações futuras
-* Verificar possibilidade de diminuir os algoritmos e encurtar os regex.
 * Criar uma função para retornar o base64 da imagem da expressão em notação científica.
